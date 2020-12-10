@@ -2,47 +2,54 @@ const mongoose = require('mongoose');
 
 const Prodcut = mongoose.model('Product');
 
-module.exports = {
 
-    async index(req, res) {
-        const {page = 1}  = req.query;
-        const products = await Prodcut.paginate({},{page, limit: 10});
+exports.getProducts = async (req, res, next) => {
 
-        return res.json(products);
-    },
+    const { page = 1 } = req.query;
+    const products = await Prodcut.paginate({}, { page, limit: 10 });
+    return res.status(200).send({
+        success: 1,
+        data: products
+    });
 
-    async sotre(req, res){
-        const product = await Prodcut.create(req.body);
-        return res.status(200).send({
-            success: 1,
-            data: product
-        })
-    },
+}
 
-    async show(req, res){
-        const product = await Prodcut.findById(req.params.id);
+exports.createProduct = async (req, res, next) => {
 
-        return res.status(200).send({
-            success: 1,
-            data: product
-        })
-    },
+    const product = await Prodcut.create(req.body);
+    return res.status(200).send({
+        success: 1,
+        data: product
+    })
 
-    async update(req, res){
-        const product = await Prodcut.findByIdAndUpdate(req.params.id, req.body, {new: true})
+}
 
-        return res.status(200).send({
-            success: 1,
-            data: product
-        })
-    },
+exports.selectProduct = async (req, res, next) => {
 
-    async destroy(req, res){
-        await Prodcut.findByIdAndRemove(req.params.id);
+    const product = await Prodcut.findById(req.params.id);
 
-        return res.status(200).send({
-            success: 1,
-            data: "Produto Removido!"
-        })
-    }
+    return res.status(200).send({
+        success: 1,
+        data: product
+    })
+}
+
+exports.updateProduct = async (req, res, next) => {
+
+    const product = await Prodcut.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+    return res.status(200).send({
+        success: 1,
+        data: product
+    })
+}
+
+exports.deleteProduct = async (req, res, next) => {
+
+    await Prodcut.findByIdAndRemove(req.params.id);
+
+    return res.status(200).send({
+        success: 1,
+        data: "Produto Removido!"
+    })
 }

@@ -19,10 +19,7 @@ mogoose.connect('mongodb://localhost:27017/nodeapi',
 // Chamada de Model's
 requireDir('./src/models/');
 
-//Chamada rota Produtos
-const Product = mogoose.model('Product');
-
-app.use('/api', require('./src/routes'))
+app.use('/api', require('./src/app'))
 
 //Ouvindo a Porta 3001
 app.listen(3001);
