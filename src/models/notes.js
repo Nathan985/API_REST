@@ -1,18 +1,22 @@
 const moongose = require('mongoose');
 const moongosePaginate = require('mongoose-paginate');
 
-const ProductSchema = new moongose.Schema({
+const UserSchema = new moongose.Schema({
+    id_user: {
+        type: String,
+        required: true,
+    },
     title: {
         type: String,
         required: true,
     },
-    description: {
+    body: {
         type: String,
-        required: true,
+        required: false,
     },
-    url: {
+    password: {
         type: String,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,
@@ -20,6 +24,6 @@ const ProductSchema = new moongose.Schema({
     }
 })
 
-ProductSchema.plugin(moongosePaginate);
+UserSchema.plugin(moongosePaginate);
 
-moongose.model('Product', ProductSchema);
+moongose.model('Notes', UserSchema);

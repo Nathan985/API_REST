@@ -7,6 +7,8 @@ routes.get('/', userController.getUsers);
 
 routes.get('/:id', userController.getUser);
 
+routes.get('/notes/:id', userController.getMyNotes);
+
 routes.post('/', userController.createUser);
 
 routes.patch('/:id', userController.update);

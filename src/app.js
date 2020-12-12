@@ -5,16 +5,16 @@ const express = require('express');
 const app = express();
 
 //Importando rotas
-const routeProduct = require('./routes/productRoute')
 const routeUser = require('./routes/userRoute')
+const routeNotes = require('./routes/notesRoute')
 
 //Utilizando o express para usar o body das requisições (JSON)
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Chamando o CRUD da rota de ADMs da MedWork
-app.use('/products/', routeProduct)
-app.use('/user/', routeUser)
+app.use('/user/', routeUser);
+app.use('/notes/', routeNotes);
 
 //Configurando o CORS para uso externo
 app.use((req, res, next) => {

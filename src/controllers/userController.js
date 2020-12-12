@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Note = mongoose.model('Notes')
 const User = mongoose.model('User');
 
 
@@ -64,4 +64,15 @@ exports.loginUser = async (req, res, next) => {
         success,
         data: user
     })
+}
+
+exports.getMyNotes = async (req, res , next) => {
+
+    const notes = await Note.find({id_user: req.params.id}, {});
+
+    return res.status(200).send({
+        success: 1,
+        data: notes
+    })
+
 }
